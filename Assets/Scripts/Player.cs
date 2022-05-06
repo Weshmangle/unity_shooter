@@ -12,11 +12,22 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotationVelocityMax;
     public float hitPoint = 3;
     public List<Gun> guns = new List<Gun>();
+    [SerializeField] protected int _score = 0;
 
     void Start()
     {
         Instance = this;
         slider.onValueChanged.AddListener(delegate {ValueChangedSlider();});
+    }
+
+    public int score
+    {
+        get { return _score ;}
+    }
+
+    public void IncrementScore()
+    {
+        _score += 1;
     }
     
     public void ValueChangedSlider()
@@ -37,8 +48,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         //RotationAtSlider();
-        AutoRotationSlider();
-        //LookAtMouseInput();
+        //AutoRotationSlider();
+        LookAtMouseInput();
     }
 
     public void RotationAtSlider()

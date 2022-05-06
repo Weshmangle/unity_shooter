@@ -18,13 +18,13 @@ public class Bullet : MonoBehaviour
             radius = data.radius;
             pierce = data.pierce;
         }
-        
-        Destroy(gameObject, 5f);
     }
 
     void Update()
     {
         transform.Translate((Vector3.right * Time.deltaTime * 10));
+        Vector3 distance = EnemyManager.Instance.transform.position - transform.position;
+        Debug.Log(distance);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +32,7 @@ public class Bullet : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             Destroy(other.gameObject);
+            Player.Instance.IncrementScore();
         }
     }
 }
